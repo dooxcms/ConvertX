@@ -17,3 +17,18 @@ services:
       - TZ=Europe/Stockholm # set your timezone, defaults to UTC
     ports:
       - 3000:3000
+
+  dev:
+    build:
+      context: .
+      # dockerfile: Debian.Dockerfile
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - HTTP_ALLOWED=true
+      - ALLOW_UNAUTHENTICATED=true
+    ports:
+      - 3001:3000
+    command: bun run dev
